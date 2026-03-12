@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Northline Studio — Landing Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0e13;
+      --bg-soft: #11161d;
+      --card: #121922;
+      --card-2: #171f2a;
+      --text: #f4f5f7;
+      --muted: #9aa4b2;
+      --line: rgba(255,255,255,.09);
+      --accent: #8fb8ff;
+      --accent-2: #9bffd6;
+      --radius: 28px;
+      --shadow: 0 20px 60px rgba(0,0,0,.28);
+      --container: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(143,184,255,.10), transparent 30%),
+        radial-gradient(circle at 80% 10%, rgba(155,255,214,.08), transparent 24%),
+        linear-gradient(180deg, #0b0e13 0%, #0d1218 100%);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img { display: block; width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 48px), var(--container));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(11, 14, 19, .72);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -.06em;
+    }
+
+    .brand span {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      color: rgba(244,245,247,.82);
+      font-size: .97rem;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn, .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: .25s ease;
+      cursor: pointer;
+    }
+
+    .btn {
+      background: linear-gradient(135deg, #f5f7fb, #b8c7dc);
+      color: #0b0e13;
+      border: none;
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--text);
+      background: rgba(255,255,255,.02);
+    }
+
+    .btn:hover, .btn-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      padding: 28px 0 24px;
+    }
+
+    .hero-wrap {
+      display: grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .hero-main, .hero-side, .metric, .panel, .gallery-card, .contact-box {
+      background: linear-gradient(180deg, rgba(255,255,255,.025), rgba(255,255,255,.018));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .hero-main {
+      position: relative;
+      min-height: 700px;
+      display: grid;
+      align-content: end;
+      padding: 42px;
+      background:
+        linear-gradient(180deg, rgba(9,12,18,.08), rgba(9,12,18,.78)),
+        url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1600&q=80') center/cover;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(10,13,18,.45);
+      color: #dbe5f4;
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      max-width: 12ch;
+      font-size: clamp(3.2rem, 7vw, 6rem);
+      line-height: .93;
+      letter-spacing: -.08em;
+    }
+
+    .hero-copy {
+      margin: 22px 0 0;
+      max-width: 720px;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: rgba(244,245,247,.78);
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+
+    .hero-side {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      gap: 0;
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
+    }
+
+    .side-image {
+      min-height: 430px;
+      background:
+        linear-gradient(180deg, rgba(10,13,18,.10), rgba(10,13,18,.20)),
+        url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80') center/cover;
+    }
+
+    .side-content {
+      padding: 28px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .side-content h3 {
+      margin: 0;
+      font-size: 1.65rem;
+      letter-spacing: -.04em;
+    }
+
+    .side-content p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .metrics {
+      padding: 18px 0 10px;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .metric {
+      padding: 26px;
+      min-height: 170px;
+      background: linear-gradient(180deg, rgba(143,184,255,.06), rgba(255,255,255,.02));
+    }
+
+    .metric small {
+      display: block;
+      color: var(--muted);
+      font-size: .85rem;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 18px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: clamp(2rem, 4vw, 3rem);
+      letter-spacing: -.08em;
+      margin-bottom: 10px;
+    }
+
+    .metric span {
+      color: #d7dde7;
+      line-height: 1.65;
+      font-size: .98rem;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 24px;
+      align-items: end;
+      margin-bottom: 22px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(2.2rem, 4vw, 4rem);
+      letter-spacing: -.07em;
+      line-height: .95;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 720px;
+    }
+
+    .panels {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 26px;
+      min-height: 260px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+    }
+
+    .panel .index {
+      display: inline-flex;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,.14);
+      color: #e9edf5;
+      margin-bottom: 22px;
+    }
+
+    .panel h3 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      letter-spacing: -.04em;
+    }
+
+    .panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .duo {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .gallery-card {
+      position: relative;
+      min-height: 620px;
+      background: linear-gradient(180deg, rgba(10,13,18,.08), rgba(10,13,18,.40)),
+        url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1500&q=80') center/cover;
+    }
+
+    .gallery-caption {
+      position: absolute;
+      left: 26px;
+      right: 26px;
+      bottom: 26px;
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(9, 12, 18, .56);
+      border: 1px solid rgba(255,255,255,.12);
+      backdrop-filter: blur(14px);
+    }
+
+    .gallery-caption h3 {
+      margin: 0 0 10px;
+      font-size: 1.55rem;
+      letter-spacing: -.05em;
+    }
+
+    .gallery-caption p {
+      margin: 0;
+      color: #d5dbe4;
+      line-height: 1.7;
+    }
+
+    .stack {
+      display: grid;
+      gap: 18px;
+    }
+
+    .stack .panel {
+      min-height: auto;
+      display: grid;
+      align-content: start;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .mini-card {
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--card);
+      box-shadow: var(--shadow);
+    }
+
+    .mini-card .thumb {
+      aspect-ratio: 1.15 / 1;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .mini-card .content {
+      padding: 22px;
+    }
+
+    .mini-card h4 {
+      margin: 0 0 10px;
+      font-size: 1.16rem;
+      letter-spacing: -.04em;
+    }
+
+    .mini-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: .96rem;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 18px;
+    }
+
+    .contact-box {
+      padding: 34px;
+      background: linear-gradient(180deg, rgba(143,184,255,.06), rgba(255,255,255,.02));
+    }
+
+    .contact-box h3 {
+      margin: 0 0 10px;
+      font-size: 2rem;
+      letter-spacing: -.06em;
+    }
+
+    .contact-box p {
+      margin: 0 0 24px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 620px;
+    }
+
+    .form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .form .full { grid-column: 1 / -1; }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(255,255,255,.03);
+      color: var(--text);
+      border-radius: 18px;
+      padding: 16px 18px;
+      font: inherit;
+      outline: none;
+      transition: .2s ease;
+    }
+
+    input:focus, textarea:focus {
+      border-color: rgba(143,184,255,.45);
+      box-shadow: 0 0 0 4px rgba(143,184,255,.08);
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    footer {
+      padding: 24px 0 42px;
+      color: #8e99a8;
+    }
+
+    .footer-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      font-size: .95rem;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 1080px) {
+      .hero-wrap,
+      .section-head,
+      .duo,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics-grid,
+      .panels {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-main { min-height: 600px; }
+      .gallery-card { min-height: 520px; }
+    }
+
+    @media (max-width: 760px) {
+      .container { width: min(calc(100% - 28px), var(--container)); }
+      .nav-links { display: none; }
+      .nav { min-height: 72px; }
+      .hero-main { padding: 24px; min-height: 540px; }
+      .metrics-grid,
+      .panels,
+      .mini-grid,
+      .form {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 { max-width: 100%; }
+      .section-head h2 { line-height: 1; }
+      .contact-box { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#" class="brand">Northline<span>.</span></a>
+      <nav class="nav-links">
+        <a href="#about">Sobre</a>
+        <a href="#services">Serviços</a>
+        <a href="#work">Projetos</a>
+        <a href="#contact">Contato</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn-secondary" href="#work">Ver portfólio</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-wrap">
+        <article class="hero-main">
+          <div>
+            <div class="eyebrow">Estúdio criativo · design, estratégia e presença digital</div>
+            <h1>Marcas sólidas pedem uma presença mais precisa.</h1>
+            <p class="hero-copy">Uma landing page com linguagem visual forte, arquitetura limpa e imagens com protagonismo. Direta, contemporânea e com uma estética mais escura para comunicar valor com mais personalidade.</p>
+            <div class="hero-cta">
+              <a href="#contact" class="btn">Começar projeto</a>
+              <a href="#services" class="btn-secondary">Explorar estrutura</a>
+            </div>
+          </div>
+        </article>
+
+        <aside class="hero-side">
+          <div class="side-image"></div>
+          <div class="side-content">
+            <h3>Visual mais sóbrio, premium e memorável.</h3>
+            <p>Essa versão muda completamente a percepção das anteriores através da paleta escura, contraste alto e composição mais elegante. Continua clean, mas com outra energia visual.</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="metrics">
+      <div class="container metrics-grid">
+        <div class="metric">
+          <small>Direção visual</small>
+          <strong>01</strong>
+          <span>Tipografia impactante, layout arejado e narrativa objetiva.</span>
+        </div>
+        <div class="metric">
+          <small>Percepção</small>
+          <strong>Dark</strong>
+          <span>Mais contraste, mais sofisticação e uma assinatura visual distinta.</span>
+        </div>
+        <div class="metric">
+          <small>Aplicação</small>
+          <strong>Flexível</strong>
+          <span>Serve para institucional, serviço premium, produto ou apresentação comercial.</span>
+        </div>
+        <div class="metric">
+          <small>Entrega</small>
+          <strong>Single file</strong>
+          <span>Estrutura inteira em um único HTML, pronta para editar e subir.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <h2>Menos ornamento.<br>Mais presença.</h2>
+          <p>O foco aqui é transmitir maturidade de marca sem parecer genérico. A página trabalha com blocos grandes, bastante respiro, seções objetivas e imagens que realmente ajudam a sustentar a percepção de valor.</p>
+        </div>
+        <div class="panels">
+          <article class="panel">
+            <div class="index">01</div>
+            <h3>Hero com impacto real</h3>
+            <p>Entrada forte, manchete clara e uma composição fotográfica que já posiciona o projeto logo no primeiro scroll.</p>
+          </article>
+          <article class="panel">
+            <div class="index">02</div>
+            <h3>Conteúdo direto ao ponto</h3>
+            <p>Sem excesso de elementos. Cada bloco cumpre um papel claro dentro da apresentação comercial da marca.</p>
+          </article>
+          <article class="panel">
+            <div class="index">03</div>
+            <h3>Estética mais autoral</h3>
+            <p>A paleta escura ajuda a diferenciar essa proposta e evita a sensação de repetição em relação às outras duas.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container duo">
+        <article class="gallery-card">
+          <div class="gallery-caption">
+            <h3>Uma estrutura pensada para vender posicionamento.</h3>
+            <p>Este bloco mostra como usar uma imagem forte para apoiar o discurso sem poluir a página. Fica excelente com fotos reais da empresa, bastidores, ambiente, equipe ou produto.</p>
+          </div>
+        </article>
+
+        <div class="stack">
+          <article class="panel">
+            <div class="index">A</div>
+            <h3>Seções amplas e respiráveis</h3>
+            <p>Em vez de empilhar dezenas de cards, a proposta distribui melhor o conteúdo e faz a marca parecer mais séria e bem resolvida.</p>
+          </article>
+          <article class="panel">
+            <div class="index">B</div>
+            <h3>Texto curto e convincente</h3>
+            <p>A copy foi desenhada para ser facilmente substituída depois, mantendo uma aparência comercial desde já.</p>
+          </article>
+          <article class="panel">
+            <div class="index">C</div>
+            <h3>Boa base para customizar</h3>
+            <p>É um modelo pronto para você adaptar ao nicho do cliente quando fechar, sem parecer genérico ou improvisado.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="container">
+        <div class="section-head">
+          <h2>Blocos visuais que parecem marca de verdade.</h2>
+          <p>As imagens abaixo entram como prova de linguagem. Você pode trocar por fotos do cliente, banco de imagens mais específico ou material próprio, sem alterar a coerência do layout.</p>
+        </div>
+
+        <div class="mini-grid">
+          <article class="mini-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="content">
+              <h4>Apresentação institucional</h4>
+              <p>Ideal para empresas que querem uma presença mais refinada, com narrativa clara e boa construção de autoridade.</p>
+            </div>
+          </article>
+
+          <article class="mini-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="content">
+              <h4>Projeto com cara premium</h4>
+              <p>A paleta escura ajuda muito quando a intenção é transmitir sofisticação sem cair no exagero visual.</p>
+            </div>
+          </article>
+
+          <article class="mini-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="content">
+              <h4>Conteúdo em camadas</h4>
+              <p>Seções que permitem encaixar diferenciais, portfólio, cases, benefícios ou produtos com bastante elegância.</p>
+            </div>
+          </article>
+
+          <article class="mini-card">
+            <div class="thumb" style="background-image:url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=80')"></div>
+            <div class="content">
+              <h4>Pronto para proposta</h4>
+              <p>Você pode usar este modelo como demonstração imediata ou como base real para evoluir o projeto final do cliente.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact-grid">
+        <div class="contact-box">
+          <h3>Quer uma página com essa direção?</h3>
+          <p>Esse último conceito foi desenhado para se distanciar visualmente dos anteriores, mantendo a mesma qualidade de composição. Mais escuro, mais marcante e com outra atmosfera.</p>
+          <a href="#" class="btn">Solicitar apresentação</a>
+        </div>
+
+        <div class="contact-box">
+          <h3>Fale sobre o projeto</h3>
+          <p>Um formulário simples para fechar a estrutura da página e reforçar a sensação de site real já na demonstração.</p>
+          <form class="form">
+            <input type="text" placeholder="Seu nome">
+            <input type="email" placeholder="Seu e-mail">
+            <input type="text" class="full" placeholder="Empresa ou segmento">
+            <textarea class="full" placeholder="Conte um pouco sobre o projeto"></textarea>
+            <div class="full">
+              <button type="button" class="btn">Enviar briefing</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-line">
+      <span>Northline Studio — conceito visual demonstrativo</span>
+      <span>Single file HTML · clean · dark · moderno</span>
+    </div>
+  </footer>
+</body>
+</html>

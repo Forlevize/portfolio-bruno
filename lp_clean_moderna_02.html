@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Studio Forma — Landing Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f3f1ec;
+      --surface: #ffffff;
+      --text: #141414;
+      --muted: #686868;
+      --line: rgba(20,20,20,.1);
+      --accent: #111111;
+      --soft: #ebe7df;
+      --radius: 26px;
+      --shadow: 0 18px 50px rgba(0,0,0,.08);
+      --container: 1240px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img { display: block; width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 48px), var(--container));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(16px);
+      background: rgba(243, 241, 236, .82);
+      border-bottom: 1px solid rgba(20,20,20,.06);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 78px;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 1.55rem;
+      font-weight: 800;
+      letter-spacing: -.05em;
+    }
+
+    .brand span { color: #7f7f7f; font-weight: 700; }
+
+    .nav-links {
+      display: flex;
+      gap: 34px;
+      font-size: .98rem;
+      color: #262626;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn, .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 24px;
+      border-radius: 999px;
+      font-weight: 600;
+      transition: .25s ease;
+      cursor: pointer;
+    }
+
+    .btn {
+      background: var(--accent);
+      color: #fff;
+      border: 1px solid var(--accent);
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--line);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 28px 0 26px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .hero-main,
+    .hero-side,
+    .feature-card,
+    .showcase,
+    .insight-card,
+    .cta-panel {
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .hero-main {
+      min-height: 700px;
+      position: relative;
+      background:
+        linear-gradient(180deg, rgba(10,10,10,.12), rgba(10,10,10,.72)),
+        url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1600&q=80') center/cover;
+      display: flex;
+      align-items: flex-end;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      padding: 54px;
+      color: #fff;
+      max-width: 760px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: .85rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      opacity: .82;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 6.2vw, 5.7rem);
+      line-height: .94;
+      letter-spacing: -.07em;
+      max-width: 8ch;
+    }
+
+    .hero-copy p {
+      margin: 24px 0 0;
+      max-width: 620px;
+      font-size: 1.08rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,.86);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+    }
+
+    .hero-actions .btn-secondary {
+      color: #fff;
+      border-color: rgba(255,255,255,.28);
+      background: rgba(255,255,255,.08);
+    }
+
+    .hero-side {
+      display: grid;
+      grid-template-rows: 1.1fr .9fr;
+      gap: 22px;
+    }
+
+    .stat-panel,
+    .image-panel {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .stat-panel {
+      padding: 34px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 320px;
+    }
+
+    .stat-panel small,
+    .section-label {
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      color: var(--muted);
+    }
+
+    .stat-value {
+      font-size: clamp(3rem, 5vw, 4.5rem);
+      line-height: 1;
+      font-weight: 800;
+      letter-spacing: -.06em;
+      margin: 18px 0 10px;
+    }
+
+    .stat-panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 28ch;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .mini-box {
+      background: var(--soft);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .mini-box strong {
+      display: block;
+      font-size: 1.25rem;
+      letter-spacing: -.04em;
+      margin-bottom: 4px;
+    }
+
+    .mini-box span {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .image-panel {
+      min-height: 358px;
+      background:
+        linear-gradient(180deg, rgba(20,20,20,.02), rgba(20,20,20,.18)),
+        url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1200&q=80') center/cover;
+      position: relative;
+    }
+
+    .image-badge {
+      position: absolute;
+      left: 24px;
+      bottom: 24px;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(10px);
+      padding: 14px 18px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+      max-width: 260px;
+    }
+
+    .image-badge strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 6px;
+    }
+
+    .image-badge span {
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.5;
+    }
+
+    section { padding: 18px 0 20px; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 22px;
+      align-items: end;
+      margin-bottom: 26px;
+    }
+
+    .section-head h2 {
+      margin: 10px 0 0;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: .96;
+      letter-spacing: -.06em;
+      max-width: 9ch;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 720px;
+      line-height: 1.8;
+      font-size: 1.02rem;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      min-height: 560px;
+    }
+
+    .feature-media {
+      height: 340px;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .feature-content {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .feature-index {
+      color: var(--muted);
+      font-size: .86rem;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .feature-content h3 {
+      margin: 0;
+      font-size: 1.65rem;
+      line-height: 1.05;
+      letter-spacing: -.05em;
+    }
+
+    .feature-content p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .showcase {
+      margin-top: 18px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .showcase-media {
+      min-height: 560px;
+      background:
+        url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1400&q=80') center/cover;
+    }
+
+    .showcase-content {
+      padding: 52px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .showcase-content h3 {
+      margin: 14px 0 18px;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: .98;
+      letter-spacing: -.06em;
+      max-width: 10ch;
+    }
+
+    .showcase-content p {
+      margin: 0 0 30px;
+      color: var(--muted);
+      line-height: 1.85;
+      max-width: 56ch;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 6px;
+    }
+
+    .metric {
+      background: var(--soft);
+      border-radius: 18px;
+      padding: 20px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 1.55rem;
+      letter-spacing: -.05em;
+      margin-bottom: 4px;
+    }
+
+    .metric span { color: var(--muted); font-size: .92rem; }
+
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .insight-card {
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .insight-card img {
+      height: 260px;
+      object-fit: cover;
+    }
+
+    .insight-body {
+      padding: 24px 24px 28px;
+    }
+
+    .insight-body h4 {
+      margin: 12px 0 10px;
+      font-size: 1.45rem;
+      line-height: 1.08;
+      letter-spacing: -.04em;
+    }
+
+    .insight-body p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.75;
+    }
+
+    .cta-panel {
+      margin: 22px 0 44px;
+      background: #121212;
+      color: #fff;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: center;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-panel h3 {
+      margin: 10px 0 10px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: .98;
+      letter-spacing: -.06em;
+      max-width: 11ch;
+    }
+
+    .cta-panel p {
+      margin: 0;
+      max-width: 58ch;
+      color: rgba(255,255,255,.72);
+      line-height: 1.8;
+    }
+
+    .footer {
+      padding: 0 0 40px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid,
+      .section-head,
+      .showcase,
+      .cta-panel,
+      .features-grid,
+      .insights-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main { min-height: 620px; }
+      .showcase-media { min-height: 420px; }
+      .cta-panel { padding: 38px 28px; }
+    }
+
+    @media (max-width: 760px) {
+      .container { width: min(calc(100% - 28px), var(--container)); }
+      .nav-links, .nav-actions .btn-secondary { display: none; }
+      .nav { min-height: 70px; }
+      .hero-copy { padding: 28px; }
+      .stat-panel { padding: 24px; }
+      .feature-content, .showcase-content, .cta-panel { padding: 24px; }
+      .feature-card { min-height: auto; }
+      .feature-media { height: 260px; }
+      .metrics, .mini-grid { grid-template-columns: 1fr 1fr; }
+      .cta-panel h3 { max-width: none; }
+    }
+
+    @media (max-width: 560px) {
+      h1 { font-size: 2.8rem; }
+      .hero-main { min-height: 560px; }
+      .metrics, .mini-grid { grid-template-columns: 1fr; }
+      .image-badge { right: 18px; left: 18px; max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#" class="brand">Studio <span>Forma</span></a>
+      <nav class="nav-links">
+        <a href="#about">Sobre</a>
+        <a href="#services">Serviços</a>
+        <a href="#cases">Projetos</a>
+        <a href="#insights">Insights</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="#cases" class="btn-secondary">Ver projetos</a>
+        <a href="#contact" class="btn">Falar agora</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <article class="hero-main">
+          <div class="hero-copy">
+            <span class="eyebrow">Design estratégico para marcas contemporâneas</span>
+            <h1>Construímos presença digital com clareza, forma e direção.</h1>
+            <p>
+              Páginas e experiências pensadas para marcas que querem parecer maiores, mais sólidas e mais desejáveis.
+              Um design limpo, editorial e objetivo — sem excessos, sem ruído, sem estética genérica.
+            </p>
+            <div class="hero-actions">
+              <a href="#contact" class="btn">Solicitar apresentação</a>
+              <a href="#services" class="btn-secondary">Explorar estrutura</a>
+            </div>
+          </div>
+        </article>
+
+        <aside class="hero-side">
+          <div class="stat-panel" id="about">
+            <div>
+              <small>Visão geral</small>
+              <div class="stat-value">+120</div>
+              <p>
+                entregas em branding, páginas comerciais, apresentações e experiências digitais focadas em percepção de valor.
+              </p>
+            </div>
+            <div class="mini-grid">
+              <div class="mini-box">
+                <strong>Clareza</strong>
+                <span>conteúdo bem organizado</span>
+              </div>
+              <div class="mini-box">
+                <strong>Impacto</strong>
+                <span>visual forte e elegante</span>
+              </div>
+              <div class="mini-box">
+                <strong>Ritmo</strong>
+                <span>navegação fluida</span>
+              </div>
+              <div class="mini-box">
+                <strong>Valor</strong>
+                <span>marca mais premium</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="image-panel">
+            <div class="image-badge">
+              <strong>Projetos com estética real</strong>
+              <span>Direção visual limpa, imagens com protagonismo e hierarquia bem definida.</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="services">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-label">Estrutura principal</span>
+            <h2>Uma linguagem visual que parece marca de verdade.</h2>
+          </div>
+          <p>
+            Este conceito foi desenhado para apresentar um portfólio mais maduro e mais confiável. O foco está em grid bem resolvido, respiro, tipografia forte e imagens em escala generosa — uma combinação que passa segurança rapidamente.
+          </p>
+        </div>
+
+        <div class="features-grid">
+          <article class="feature-card">
+            <div class="feature-media" style="background-image:url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="feature-content">
+              <span class="feature-index">01 / Posicionamento</span>
+              <h3>Interfaces que organizam a mensagem com precisão.</h3>
+              <p>
+                Layouts com leitura rápida, distribuição inteligente de conteúdo e seções que ajudam a contar uma história sem parecer engessada.
+              </p>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-media" style="background-image:url('https://images.unsplash.com/photo-1497366412874-3415097a27e7?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="feature-content">
+              <span class="feature-index">02 / Apresentação</span>
+              <h3>Imagem grande, tipografia forte e seções diretas ao ponto.</h3>
+              <p>
+                Uma composição que lembra empresas bem posicionadas: mais editorial, menos promocional, com aparência atual e credível.
+              </p>
+            </div>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-media" style="background-image:url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80');"></div>
+            <div class="feature-content">
+              <span class="feature-index">03 / Conversão</span>
+              <h3>Estrutura pronta para apresentar serviços, cases e autoridade.</h3>
+              <p>
+                Ideal para negócios que precisam parecer sólidos logo no primeiro contato, sem depender de efeitos exagerados ou visual artificial.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cases">
+      <div class="container">
+        <div class="showcase">
+          <div class="showcase-media"></div>
+          <div class="showcase-content">
+            <span class="section-label">Destaque editorial</span>
+            <h3>Uma vitrine limpa para produtos, serviços ou soluções premium.</h3>
+            <p>
+              Aqui você pode colocar fotos reais da empresa, aplicações, bastidores, estrutura, showroom, equipe ou qualquer material autoral. O resultado é uma página com cara de marca consolidada, pronta para reunião comercial ou apresentação institucional.
+            </p>
+            <a href="#contact" class="btn" style="width: fit-content;">Quero essa direção</a>
+            <div class="metrics">
+              <div class="metric">
+                <strong>01</strong>
+                <span>hero forte e direto</span>
+              </div>
+              <div class="metric">
+                <strong>02</strong>
+                <span>grid amplo e clean</span>
+              </div>
+              <div class="metric">
+                <strong>03</strong>
+                <span>blocos visuais críveis</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="insights">
+      <div class="container">
+        <div class="section-head">
+          <div>
+            <span class="section-label">Conteúdo e profundidade</span>
+            <h2>Mais repertório visual, menos sensação de template.</h2>
+          </div>
+          <p>
+            Este segundo conceito se apoia mais em atmosfera e composição do que em efeitos. Ele é ótimo para negócios que querem parecer premium, bem organizados e confiáveis, mesmo com uma estrutura de página simples.
+          </p>
+        </div>
+
+        <div class="insights-grid">
+          <article class="insight-card">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="Equipe em reunião" />
+            <div class="insight-body">
+              <span class="section-label">Direção</span>
+              <h4>Hierarquia visual bem resolvida</h4>
+              <p>Blocos maiores, títulos curtos e seções com bastante respiro criam uma leitura mais premium e segura.</p>
+            </div>
+          </article>
+
+          <article class="insight-card">
+            <img src="https://images.unsplash.com/photo-1497215842964-222b430dc094?auto=format&fit=crop&w=1200&q=80" alt="Espaço de trabalho moderno" />
+            <div class="insight-body">
+              <span class="section-label">Composição</span>
+              <h4>Imagem com protagonismo real</h4>
+              <p>As fotos entram como elemento de marca, não como decoração genérica. Isso deixa o projeto mais crível.</p>
+            </div>
+          </article>
+
+          <article class="insight-card">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="Apresentação corporativa" />
+            <div class="insight-body">
+              <span class="section-label">Resultado</span>
+              <h4>Percepção de valor mais alta</h4>
+              <p>Quando a página respira e a mensagem aparece limpa, a marca automaticamente parece mais profissional.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="cta-panel">
+          <div>
+            <span class="section-label" style="color: rgba(255,255,255,.48);">Próximo passo</span>
+            <h3>Posso adaptar esse conceito para qualquer nicho em poucos ajustes.</h3>
+            <p>
+              Troca de textos, imagens, cores, seções e chamadas para criar uma apresentação mais próxima do cliente final — mantendo a mesma linha clean, moderna e profissional.
+            </p>
+          </div>
+          <a href="#" class="btn" style="background:#fff;color:#111;border-color:#fff;">Solicitar orçamento</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container footer">
+    Conceito demonstrativo desenvolvido em arquivo único para apresentação comercial.
+  </footer>
+</body>
+</html>
